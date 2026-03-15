@@ -15,9 +15,9 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-          바다의 세계로
+          We are breathing
           <br />
-          <span className="text-sunset">초대합니다</span>
+          <span className="text-sunset">everywhere</span>
         </h1>
         <p className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
           전문 스쿠버 다이빙 교육 &amp; 투어
