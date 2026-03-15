@@ -9,9 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 연락처 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-sunset">
-              {t("contact")}
-            </h3>
+            <h3 className="text-lg font-bold mb-4 text-sunset">GoDiveKor</h3>
+            <p className="text-sm text-gray-300 mb-3">
+              고다이브코리아 대표 권예지
+            </p>
+            <p className="text-sm text-gray-300 mb-4">
+              사업자등록번호 295-28-00859 (종합여행업 등록)
+            </p>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,7 +50,7 @@ export default function Footer() {
 
           {/* 사업자 정보 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-sunset">GoDiveKor</h3>
+            <h3 className="text-lg font-bold mb-4 text-sunset">&nbsp;</h3>
             <p className="text-sm text-gray-300 leading-relaxed">
               {t("companyDescription")}
               <br />
