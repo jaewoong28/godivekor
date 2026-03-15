@@ -1,19 +1,30 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import type { DatesSetArg } from "@fullcalendar/core";
-import { events } from "@/data/events";
+import type { DiveEvent } from "@/data/events";
 
 export default function ScheduleSection() {
+  const [events, setEvents] = useState<DiveEvent[]>([]);
   const [currentMonth, setCurrentMonth] = useState(() => {
     const now = new Date();
     return { year: now.getFullYear(), month: now.getMonth() };
   });
 
+  useEffect(() => {
+    fetch("/api/events")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setEvents(data);
+      })
+      .catch(() => {
+        // API 실패 시 빈 배열 유지
+      });
+  }, []);
+
   const handleDatesSet = (dateInfo: DatesSetArg) => {
-    // FullCalendar에서 현재 보이는 달이 바뀔 때 호출
     const mid = new Date(
       (dateInfo.start.getTime() + dateInfo.end.getTime()) / 2
     );
@@ -31,7 +42,7 @@ export default function ScheduleSection() {
           end.getMonth() === currentMonth.month)
       );
     });
-  }, [currentMonth]);
+  }, [currentMonth, events]);
 
   const monthName = new Date(
     currentMonth.year,
@@ -83,13 +94,18 @@ export default function ScheduleSection() {
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
               locale="ko"
-              events={events.map((e) => ({
-                id: e.id,
-                title: e.title,
-                start: e.start,
-                end: e.end,
-                color: e.color,
-              }))}
+              events={events.map((e) => {
+                // FullCalendar는 종료일을 exclusive로 처리하므로 하루 추가
+                const endDate = new Date(e.end);
+                endDate.setDate(endDate.getDate() + 1);
+                return {
+                  id: e.id,
+                  title: e.title,
+                  start: e.start,
+                  end: endDate.toISOString().split("T")[0],
+                  color: e.color,
+                };
+              })}
               headerToolbar={{
                 left: "prev",
                 center: "title",
