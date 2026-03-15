@@ -12,10 +12,11 @@ export default function Header() {
   const pathname = usePathname();
 
   const navLinks = [
-    { label: t("home"), href: "#" },
-    { label: t("courses"), href: "#courses" },
-    { label: t("schedule"), href: "#schedule" },
-    { label: t("contact"), href: "#contact" },
+    { label: t("home"), href: `/${locale}` },
+    { label: t("courses"), href: `/${locale}#courses` },
+    { label: t("schedule"), href: `/${locale}#schedule` },
+    { label: t("logbook"), href: `/${locale}/logbook` },
+    { label: t("contact"), href: `/${locale}#contact` },
   ];
 
   const switchLocale = () => {

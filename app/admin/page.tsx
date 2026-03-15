@@ -7,12 +7,17 @@ import type { DiveEvent } from "@/data/events";
 import EventForm from "@/components/admin/EventForm";
 import type { EventFormData } from "@/components/admin/EventForm";
 import EventTable from "@/components/admin/EventTable";
+import LogbookDetail from "@/components/admin/LogbookDetail";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [events, setEvents] = useState<DiveEvent[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [logbooks, setLogbooks] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedLogbook, setSelectedLogbook] = useState<any>(null);
   const [showForm, setShowForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState<DiveEvent | null>(null);
   const [loading, setLoading] = useState(false);
@@ -36,9 +41,26 @@ export default function AdminPage() {
     }
   }, []);
 
+  const fetchLogbooks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/logbooks", {
+        headers: { "x-admin-password": getAuthPassword() },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setLogbooks(data);
+      }
+    } catch {
+      console.error("로그북을 불러오는데 실패했습니다");
+    }
+  }, []);
+
   useEffect(() => {
-    if (isAuthenticated) fetchEvents();
-  }, [isAuthenticated, fetchEvents]);
+    if (isAuthenticated) {
+      fetchEvents();
+      fetchLogbooks();
+    }
+  }, [isAuthenticated, fetchEvents, fetchLogbooks]);
 
   const getAuthPassword = () => {
     return sessionStorage.getItem("admin_password") || "";
@@ -257,6 +279,78 @@ export default function AdminPage() {
         </div>
       </div>
 
+        {/* 로그북 관리 */}
+        <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-[#111111]">로그북 관리</h2>
+            <p className="text-sm text-gray-400 mt-0.5">
+              총 {logbooks.length}개의 로그북
+            </p>
+          </div>
+
+          {logbooks.length === 0 ? (
+            <div className="text-center py-12 text-gray-400 text-sm">
+              아직 작성된 로그북이 없습니다.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">로그#</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">이름</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">날짜</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">지역</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">포인트</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">최대수심</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">다이빙시간</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-600">강사</th>
+                    <th className="text-right py-3 px-4 font-semibold text-gray-600">관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {logbooks.map((log) => (
+                    <tr
+                      key={log.id}
+                      onClick={() => setSelectedLogbook(log)}
+                      className="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer"
+                    >
+                      <td className="py-3 px-4 text-gray-500">{log.log_number || "-"}</td>
+                      <td className="py-3 px-4 font-medium text-[#111111]">{log.name}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.date}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.location || "-"}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.dive_site || "-"}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.max_depth ? `${log.max_depth}m` : "-"}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.dive_time ? `${log.dive_time}min` : "-"}</td>
+                      <td className="py-3 px-4 text-gray-500">{log.instructor || "-"}</td>
+                      <td className="py-3 px-4 text-right">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (confirm(`"${log.name}"의 로그북을 삭제할까요?`)) {
+                              fetch("/api/logbooks", {
+                                method: "DELETE",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                  "x-admin-password": sessionStorage.getItem("admin_password") || "",
+                                },
+                                body: JSON.stringify({ id: log.id }),
+                              }).then(() => fetchLogbooks());
+                            }
+                          }}
+                          className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-600 hover:text-white transition-colors"
+                        >
+                          삭제
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
       {/* 추가 모달 */}
       {showForm && (
         <EventForm
@@ -272,6 +366,17 @@ export default function AdminPage() {
           onSubmit={handleEdit}
           onCancel={() => setEditingEvent(null)}
           isEdit
+        />
+      )}
+
+      {/* 로그북 상세 모달 */}
+      {selectedLogbook && (
+        <LogbookDetail
+          logbook={selectedLogbook}
+          onClose={() => setSelectedLogbook(null)}
+          onSignatureSaved={() => {
+            fetchLogbooks();
+          }}
         />
       )}
     </div>
