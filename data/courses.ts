@@ -12,7 +12,7 @@ export const courses: Course[] = [
   {
     id: "open-water",
     title: "오픈워터다이버 코스",
-    subtitle: "PADI Open Water Diver",
+    subtitle: "SDI Open Water Diver",
     price: "50만원",
     details: [
       { label: "교육비", value: "50만원" },
@@ -27,7 +27,7 @@ export const courses: Course[] = [
   {
     id: "advanced",
     title: "어드밴스드 오픈워터 코스",
-    subtitle: "PADI Advanced Open Water Diver",
+    subtitle: "SDI Advanced Open Water Diver",
     price: "40만원",
     details: [
       { label: "교육비", value: "40만원" },
@@ -42,7 +42,7 @@ export const courses: Course[] = [
   {
     id: "rescue",
     title: "레스큐다이버 코스",
-    subtitle: "PADI Rescue Diver",
+    subtitle: "SDI Rescue Diver",
     price: "45만원",
     details: [
       { label: "교육비", value: "45만원" },
