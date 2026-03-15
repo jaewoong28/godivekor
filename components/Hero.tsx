@@ -1,4 +1,8 @@
+import { useTranslations } from "next-intl";
+
 export default function Hero() {
+  const t = useTranslations("Hero");
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -15,27 +19,27 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-          We are breathing
+          {t("title1")}
           <br />
-          <span className="text-sunset">everywhere</span>
+          <span className="text-sunset">{t("title2")}</span>
         </h1>
         <p className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
-          전문 스쿠버 다이빙 교육 &amp; 투어
+          {t("subtitle")}
           <br className="hidden sm:block" />
-          안전하고 즐거운 다이빙, GoDiveKor와 함께하세요
+          {t("description")}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#courses"
             className="inline-flex items-center justify-center bg-sunset hover:bg-sunset-dark text-white font-bold text-base px-8 py-4 rounded-full shadow-lg transition-all hover:scale-105"
           >
-            교육과정 보기
+            {t("ctaCourses")}
           </a>
           <a
             href="#schedule"
             className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-ocean font-bold text-base px-8 py-4 rounded-full transition-all hover:scale-105"
           >
-            스케줄 확인
+            {t("ctaSchedule")}
           </a>
         </div>
       </div>

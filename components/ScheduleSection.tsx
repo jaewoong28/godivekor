@@ -5,6 +5,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import type { DatesSetArg } from "@fullcalendar/core";
 import type { DiveEvent } from "@/data/events";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function ScheduleSection() {
   const [events, setEvents] = useState<DiveEvent[]>([]);
@@ -12,6 +13,8 @@ export default function ScheduleSection() {
     const now = new Date();
     return { year: now.getFullYear(), month: now.getMonth() };
   });
+  const t = useTranslations("Schedule");
+  const locale = useLocale();
 
   useEffect(() => {
     fetch("/api/events")
@@ -19,9 +22,7 @@ export default function ScheduleSection() {
       .then((data) => {
         if (Array.isArray(data)) setEvents(data);
       })
-      .catch(() => {
-        // API 실패 시 빈 배열 유지
-      });
+      .catch(() => {});
   }, []);
 
   const handleDatesSet = (dateInfo: DatesSetArg) => {
@@ -47,7 +48,7 @@ export default function ScheduleSection() {
   const monthName = new Date(
     currentMonth.year,
     currentMonth.month
-  ).toLocaleDateString("ko-KR", {
+  ).toLocaleDateString(locale === "ko" ? "ko-KR" : "en-US", {
     year: "numeric",
     month: "long",
   });
@@ -67,21 +68,21 @@ export default function ScheduleSection() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-black text-[#111111] mb-3">
-            스케줄
+            {t("sectionTitle")}
           </h2>
           <div className="w-16 h-1 bg-ocean mx-auto rounded-full mb-4" />
           <p className="text-gray-500 text-base max-w-xl mx-auto">
-            교육 및 투어 일정을 확인하세요
+            {t("sectionDescription")}
           </p>
           {/* Legend */}
           <div className="flex justify-center gap-6 mt-4">
             <div className="flex items-center gap-2 text-sm">
               <span className="w-3 h-3 rounded-full bg-ocean" />
-              <span className="text-gray-600">교육</span>
+              <span className="text-gray-600">{t("education")}</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="w-3 h-3 rounded-full bg-sunset" />
-              <span className="text-gray-600">투어</span>
+              <span className="text-gray-600">{t("tour")}</span>
             </div>
           </div>
         </div>
@@ -93,9 +94,8 @@ export default function ScheduleSection() {
             <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
-              locale="ko"
+              locale={locale}
               events={events.map((e) => {
-                // FullCalendar는 종료일을 exclusive로 처리하므로 하루 추가
                 const endDate = new Date(e.end);
                 endDate.setDate(endDate.getDate() + 1);
                 return {
@@ -121,15 +121,15 @@ export default function ScheduleSection() {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm p-6 sticky top-20">
               <h3 className="text-lg font-bold text-[#111111] mb-1">
-                {monthName} 일정
+                {t("monthSchedule", { month: monthName })}
               </h3>
               <p className="text-sm text-gray-400 mb-5">
-                {filteredEvents.length}개의 일정
+                {t("eventCount", { count: filteredEvents.length })}
               </p>
 
               {filteredEvents.length === 0 ? (
                 <div className="text-center py-10 text-gray-400 text-sm">
-                  이 달에 등록된 일정이 없습니다
+                  {t("noEvents")}
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -162,7 +162,9 @@ export default function ScheduleSection() {
                             : "bg-orange-100 text-sunset-dark"
                         }`}
                       >
-                        {event.type === "education" ? "교육" : "투어"}
+                        {event.type === "education"
+                          ? t("education")
+                          : t("tour")}
                       </span>
                     </div>
                   ))}

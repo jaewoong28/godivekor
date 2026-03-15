@@ -1,11 +1,17 @@
+import { useTranslations } from "next-intl";
+
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer id="contact" className="bg-[#111111] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 연락처 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-sunset">연락처</h3>
+            <h3 className="text-lg font-bold mb-4 text-sunset">
+              {t("contact")}
+            </h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,9 +48,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4 text-sunset">GoDiveKor</h3>
             <p className="text-sm text-gray-300 leading-relaxed">
-              전문 스쿠버 다이빙 교육과 투어를 제공합니다.
+              {t("companyDescription")}
               <br />
-              안전하고 즐거운 다이빙 경험을 약속합니다.
+              {t("companyPromise")}
             </p>
           </div>
         </div>

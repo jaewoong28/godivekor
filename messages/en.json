@@ -1,0 +1,107 @@
+{
+  "Header": {
+    "home": "Home",
+    "courses": "Courses",
+    "schedule": "Schedule",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title1": "We are breathing",
+    "title2": "everywhere",
+    "subtitle": "Professional Scuba Diving Education & Tours",
+    "description": "Safe and exciting diving experiences with GoDiveKor",
+    "ctaCourses": "View Courses",
+    "ctaSchedule": "Check Schedule"
+  },
+  "Courses": {
+    "sectionTitle": "Courses",
+    "sectionDescription": "Step-by-step scuba diving programs from beginner to expert",
+    "infoTitle": "Course Info",
+    "items": {
+      "open-water": {
+        "title": "Open Water Diver Course",
+        "subtitle": "SDI Open Water Diver",
+        "price": "₩500,000",
+        "description": "Your first step into scuba diving! This course qualifies you to dive safely to a depth of 18 meters. Through theory, pool skills practice, and real ocean dives, you'll grow into a confident diver.",
+        "details": {
+          "fee": "Course Fee",
+          "feeValue": "₩500,000",
+          "theory": "Theory",
+          "theoryValue": "4 hours",
+          "pool": "Pool Training",
+          "poolValue": "2 days",
+          "openWater": "Open Water",
+          "openWaterValue": "4 dives"
+        }
+      },
+      "advanced": {
+        "title": "Advanced Open Water Course",
+        "subtitle": "SDI Advanced Open Water Diver",
+        "price": "₩400,000",
+        "description": "The next level after Open Water! Dive up to 30 meters and experience 5 adventure dives including deep diving, underwater navigation, and night diving. Get ready to explore the wider ocean.",
+        "details": {
+          "fee": "Course Fee",
+          "feeValue": "₩400,000",
+          "theory": "Theory",
+          "theoryValue": "Self-study",
+          "openWater": "Open Water",
+          "openWaterValue": "5 dives",
+          "includes": "Includes",
+          "includesValue": "Deep diving, navigation"
+        }
+      },
+      "rescue": {
+        "title": "Rescue Diver Course",
+        "subtitle": "SDI Rescue Diver",
+        "price": "₩450,000",
+        "description": "Learn to handle emergency situations during diving. From self-rescue to assisting other divers and emergency management, this course will help you become a true diver.",
+        "details": {
+          "fee": "Course Fee",
+          "feeValue": "₩450,000",
+          "theory": "Theory",
+          "theoryValue": "6 hours",
+          "pool": "Pool Training",
+          "poolValue": "1 day",
+          "openWater": "Open Water",
+          "openWaterValue": "2 days",
+          "prerequisite": "Prerequisite",
+          "prerequisiteValue": "Advanced + EFR"
+        }
+      },
+      "fun-dive": {
+        "title": "Discover Scuba Diving",
+        "subtitle": "Discover Scuba Diving",
+        "price": "₩150,000",
+        "description": "Experience the underwater world without certification! A professional instructor accompanies you 1:1 for a safe and guided underwater adventure. Perfect for first-time divers.",
+        "details": {
+          "fee": "Course Fee",
+          "feeValue": "₩150,000",
+          "duration": "Duration",
+          "durationValue": "About 2-3 hours",
+          "includes": "Includes",
+          "includesValue": "Full equipment, instructor",
+          "prerequisite": "Prerequisite",
+          "prerequisiteValue": "None (anyone welcome)"
+        }
+      }
+    }
+  },
+  "Schedule": {
+    "sectionTitle": "Schedule",
+    "sectionDescription": "Check our education and tour schedules",
+    "education": "Education",
+    "tour": "Tour",
+    "monthSchedule": "{month} Schedule",
+    "eventCount": "{count} events",
+    "noEvents": "No events scheduled for this month"
+  },
+  "Footer": {
+    "contact": "Contact",
+    "companyDescription": "Professional scuba diving education and tours.",
+    "companyPromise": "We promise safe and exciting diving experiences."
+  },
+  "Metadata": {
+    "title": "GoDiveKor | Scuba Diving Education & Tours",
+    "description": "Professional scuba diving education and tours. Check SDI certified courses and diving tour schedules."
+  }
+}
