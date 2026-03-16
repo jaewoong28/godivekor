@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import KakaoButton from "@/components/KakaoButton";
 
 type Props = {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <Header />
       {children}
       <Footer />
+      <KakaoButton />
     </NextIntlClientProvider>
   );
 }
