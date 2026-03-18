@@ -7,8 +7,6 @@ import type { DatesSetArg } from "@fullcalendar/core";
 import type { DiveEvent } from "@/data/events";
 import { useTranslations, useLocale } from "next-intl";
 
-const SIPADAN_LINK = "https://fringe-sardine-3af.notion.site/2026-11c876ca68e880668605c4546bed213c";
-
 export default function ScheduleSection() {
   const [events, setEvents] = useState<DiveEvent[]>([]);
   const [currentMonth, setCurrentMonth] = useState(() => {
@@ -151,14 +149,63 @@ export default function ScheduleSection() {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {currentMonthEvents.map((event) => {
-                    const isSipadan = event.title.includes("시파단") || event.title.toLowerCase().includes("sipadan");
-                    const Wrapper = isSipadan ? "a" : "div";
-                    return (
-                      <Wrapper
+                  {currentMonthEvents.map((event) => (
+                    <div
+                      key={event.id}
+                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100"
+                    >
+                      <span
+                        className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
+                        style={{ backgroundColor: event.color }}
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-sm text-[#111111] truncate">
+                          {event.title}
+                        </p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {formatDateRange(event.start, event.end)}
+                        </p>
+                        {event.description && (
+                          <p className="text-xs text-gray-500 mt-1">
+                            {event.description}
+                          </p>
+                        )}
+                      </div>
+                      <span
+                        className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${
+                          event.type === "education"
+                            ? "bg-ocean-light text-ocean"
+                            : "bg-orange-100 text-sunset-dark"
+                        }`}
+                      >
+                        {event.type === "education"
+                          ? t("education")
+                          : t("tour")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* 다음 달 */}
+              <div className="mt-6 pt-5 border-t border-gray-200">
+                <h3 className="text-lg font-bold text-[#111111] mb-1">
+                  {t("monthSchedule", { month: nextMonthName })}
+                </h3>
+                <p className="text-sm text-gray-400 mb-5">
+                  {t("eventCount", { count: nextMonthEvents.length })}
+                </p>
+
+                {nextMonthEvents.length === 0 ? (
+                  <div className="text-center py-6 text-gray-400 text-sm">
+                    {t("noEvents")}
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {nextMonthEvents.map((event) => (
+                      <div
                         key={event.id}
-                        {...(isSipadan ? { href: SIPADAN_LINK, target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className={`flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 ${isSipadan ? "cursor-pointer ring-1 ring-sunset/30 hover:ring-sunset" : ""}`}
+                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100"
                       >
                         <span
                           className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
@@ -167,7 +214,6 @@ export default function ScheduleSection() {
                         <div className="min-w-0 flex-1">
                           <p className="font-semibold text-sm text-[#111111] truncate">
                             {event.title}
-                            {isSipadan && <span className="ml-1 text-sunset text-xs">→ 상세보기</span>}
                           </p>
                           <p className="text-xs text-gray-400 mt-0.5">
                             {formatDateRange(event.start, event.end)}
@@ -189,68 +235,8 @@ export default function ScheduleSection() {
                             ? t("education")
                             : t("tour")}
                         </span>
-                      </Wrapper>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* 다음 달 */}
-              <div className="mt-6 pt-5 border-t border-gray-200">
-                <h3 className="text-lg font-bold text-[#111111] mb-1">
-                  {t("monthSchedule", { month: nextMonthName })}
-                </h3>
-                <p className="text-sm text-gray-400 mb-5">
-                  {t("eventCount", { count: nextMonthEvents.length })}
-                </p>
-
-                {nextMonthEvents.length === 0 ? (
-                  <div className="text-center py-6 text-gray-400 text-sm">
-                    {t("noEvents")}
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {nextMonthEvents.map((event) => {
-                      const isSipadan = event.title.includes("시파단") || event.title.toLowerCase().includes("sipadan");
-                      const Wrapper = isSipadan ? "a" : "div";
-                      return (
-                        <Wrapper
-                          key={event.id}
-                          {...(isSipadan ? { href: SIPADAN_LINK, target: "_blank", rel: "noopener noreferrer" } : {})}
-                          className={`flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 ${isSipadan ? "cursor-pointer ring-1 ring-sunset/30 hover:ring-sunset" : ""}`}
-                        >
-                          <span
-                            className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
-                            style={{ backgroundColor: event.color }}
-                          />
-                          <div className="min-w-0 flex-1">
-                            <p className="font-semibold text-sm text-[#111111] truncate">
-                              {event.title}
-                              {isSipadan && <span className="ml-1 text-sunset text-xs">→ 상세보기</span>}
-                            </p>
-                            <p className="text-xs text-gray-400 mt-0.5">
-                              {formatDateRange(event.start, event.end)}
-                            </p>
-                            {event.description && (
-                              <p className="text-xs text-gray-500 mt-1">
-                                {event.description}
-                              </p>
-                            )}
-                          </div>
-                          <span
-                            className={`text-xs font-medium px-2 py-0.5 rounded-full shrink-0 ${
-                              event.type === "education"
-                                ? "bg-ocean-light text-ocean"
-                                : "bg-orange-100 text-sunset-dark"
-                            }`}
-                          >
-                            {event.type === "education"
-                              ? t("education")
-                              : t("tour")}
-                          </span>
-                        </Wrapper>
-                      );
-                    })}
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>

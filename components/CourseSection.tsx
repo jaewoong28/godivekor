@@ -21,12 +21,6 @@ const courseImages: Record<string, string> = {
 };
 
 const courseDetailKeys: Record<string, string[][]> = {
-  "open-water": [
-    ["fee", "feeValue"],
-    ["theory", "theoryValue"],
-    ["pool", "poolValue"],
-    ["openWater", "openWaterValue"],
-  ],
   advanced: [
     ["fee", "feeValue"],
     ["theory", "theoryValue"],
@@ -90,49 +84,115 @@ export default function CourseSection() {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                  {/* Image */}
-                  <div className="rounded-xl overflow-hidden">
-                    <img
-                      src={courseImages[courseId]}
-                      alt={t(`items.${courseId}.title`)}
-                      className="w-full h-56 object-cover"
-                    />
-                  </div>
+                {courseId === "open-water" ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
+                    {/* Image */}
+                    <div className="rounded-xl overflow-hidden">
+                      <img
+                        src={courseImages[courseId]}
+                        alt={t(`items.${courseId}.title`)}
+                        className="w-full h-auto object-cover rounded-xl"
+                      />
+                    </div>
 
-                  {/* Details */}
-                  <div>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-5">
-                      {t(`items.${courseId}.description`)}
-                    </p>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <h4 className="font-bold text-sm text-ocean mb-3">
-                        {t("infoTitle")}
+                    {/* Rich Content */}
+                    <div className="space-y-5">
+                      <h4 className="text-base font-bold text-[#111111]">
+                        {t("items.open-water.heading")}
                       </h4>
-                      <div className="space-y-2">
-                        {courseDetailKeys[courseId].map(
-                          ([labelKey, valueKey]) => (
-                            <div
-                              key={labelKey}
-                              className="flex justify-between items-center text-sm"
-                            >
-                              <span className="text-gray-500">
-                                {t(
-                                  `items.${courseId}.details.${labelKey}`
-                                )}
-                              </span>
-                              <span className="font-semibold text-[#111111]">
-                                {t(
-                                  `items.${courseId}.details.${valueKey}`
-                                )}
-                              </span>
-                            </div>
-                          )
-                        )}
+                      <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                        {t("items.open-water.desc1")}
+                      </div>
+                      <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                        {t("items.open-water.desc2")}
+                      </div>
+
+                      <hr className="border-gray-200" />
+
+                      <div>
+                        <h5 className="font-bold text-sm text-[#111111] mb-2">
+                          {t("items.open-water.curriculumTitle")}
+                        </h5>
+                        <ul className="space-y-1.5 text-sm text-gray-700">
+                          {([1,2,3,4,5] as const).map((n) => (
+                            <li key={n} className="flex items-center gap-1">
+                              <span>•</span>
+                              <span>{t(`items.open-water.curriculum${n}`)}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <hr className="border-gray-200" />
+
+                      <p className="font-bold text-sm text-[#111111]">
+                        {t("items.open-water.feeLabel")}
+                      </p>
+
+                      <hr className="border-gray-200" />
+
+                      <div>
+                        <h5 className="font-bold text-sm text-[#111111] mb-2">
+                          {t("items.open-water.excludedTitle")}
+                        </h5>
+                        <ul className="space-y-1.5 text-sm text-gray-500">
+                          <li className="flex items-start gap-1">
+                            <span>•</span>
+                            <span>{t("items.open-water.excluded1")}</span>
+                          </li>
+                          <li className="flex items-start gap-1">
+                            <span>•</span>
+                            <span>{t("items.open-water.excluded2")}</span>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
+                    {/* Image */}
+                    <div className="rounded-xl overflow-hidden">
+                      <img
+                        src={courseImages[courseId]}
+                        alt={t(`items.${courseId}.title`)}
+                        className="w-full h-56 object-cover"
+                      />
+                    </div>
+
+                    {/* Details */}
+                    <div>
+                      <p className="text-gray-600 text-sm leading-relaxed mb-5">
+                        {t(`items.${courseId}.description`)}
+                      </p>
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <h4 className="font-bold text-sm text-ocean mb-3">
+                          {t("infoTitle")}
+                        </h4>
+                        <div className="space-y-2">
+                          {courseDetailKeys[courseId].map(
+                            ([labelKey, valueKey]) => (
+                              <div
+                                key={labelKey}
+                                className="flex justify-between items-center text-sm"
+                              >
+                                <span className="text-gray-500">
+                                  {t(
+                                    `items.${courseId}.details.${labelKey}`
+                                  )}
+                                </span>
+                                <span className="font-semibold text-[#111111]">
+                                  {t(
+                                    `items.${courseId}.details.${valueKey}`
+                                  )}
+                                </span>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </AccordionContent>
             </AccordionItem>
           ))}

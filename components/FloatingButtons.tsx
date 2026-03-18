@@ -3,19 +3,6 @@
 export default function FloatingButtons() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {/* 시파단 투어 버튼 */}
-      <a
-        href="https://fringe-sardine-3af.notion.site/2026-11c876ca68e880668605c4546bed213c"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 bg-ocean text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 text-sm font-bold animate-pulse"
-        style={{ animationDuration: "1s" }}
-      >
-        <span className="text-lg leading-none">🤿</span>
-        <span className="hidden sm:inline">2026 고다이브 말레이시아 🇲🇾 시파단 투어</span>
-        <span className="sm:hidden">🇲🇾 시파단 투어</span>
-      </a>
-
       {/* 카카오톡 버튼 */}
       <a
         href="http://pf.kakao.com/_qAQtb/chat"

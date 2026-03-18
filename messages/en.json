@@ -4,7 +4,8 @@
     "courses": "Courses",
     "schedule": "Schedule",
     "contact": "Contact",
-    "logbook": "Logbook"
+    "logbook": "Logbook",
+    "tours": "Tours"
   },
   "Hero": {
     "title1": "We are breathing",
@@ -22,18 +23,20 @@
       "open-water": {
         "title": "Open Water Diver Course",
         "subtitle": "SDI Open Water Diver",
-        "price": "₩500,000",
-        "description": "Your first step into scuba diving! This course qualifies you to dive safely to a depth of 18 meters. Through theory, pool skills practice, and real ocean dives, you'll grow into a confident diver.",
-        "details": {
-          "fee": "Course Fee",
-          "feeValue": "₩500,000",
-          "theory": "Theory",
-          "theoryValue": "4 hours",
-          "pool": "Pool Training",
-          "poolValue": "2 days",
-          "openWater": "Open Water",
-          "openWaterValue": "4 dives"
-        }
+        "price": "₩550,000",
+        "heading": "🤿 Your First Step into Scuba Diving, Where You First Meet the Ocean",
+        "desc1": "A new world awaits you beneath the waves.\nThis course certifies you to dive safely to a depth of 18m.",
+        "desc2": "From theory to pool training, and finally the real ocean\nWith confidence building at every step, you'll become a proud diver before you know it. 🌊",
+        "curriculumTitle": "📌 Curriculum",
+        "curriculum1": "🎓 Theory : 3-4 hours",
+        "curriculum2": "🏊 Pool Training (Confined Water) : 2 sessions",
+        "curriculum3": "🌊 Ocean Training (Open Water) : 4 dives",
+        "curriculum4": "📓 Post-dive Logbook",
+        "curriculum5": "📝 Written Exam",
+        "feeLabel": "📌 Course Fee : ₩550,000",
+        "excludedTitle": "📌 Not Included",
+        "excluded1": "Pool entry fee, tank & equipment rental",
+        "excluded2": "Ocean training costs (overseas approx. $150/day, min. 2 days)"
       },
       "advanced": {
         "title": "Advanced Open Water Course",
@@ -146,6 +149,39 @@
     "successTitle": "Logbook Saved!",
     "successMessage": "Your dive log has been saved successfully.",
     "writeAnother": "Write Another"
+  },
+  "Tours": {
+    "pageTitle": "🤿 Diving Tours",
+    "pageSubtitle": "7 Countries · 17 Dive Points",
+    "countries": {
+      "philippines": "Philippines",
+      "japan": "Japan",
+      "korea": "Korea",
+      "indonesia": "Indonesia",
+      "palau": "Palau",
+      "malaysia": "Malaysia",
+      "mexico": "Mexico"
+    },
+    "pointCount": "{count} points",
+    "points": {
+      "cebu": { "name": "Cebu", "region": "Central Visayas, Philippines", "description": "Whale shark snorkeling, sardine tornado, crystal-clear emerald waters", "tags": "Whale Shark,Beginner-Intermediate" },
+      "moalboal": { "name": "Moalboal", "region": "Southwest Cebu", "description": "Millions of sardines in a tornado, sea turtles, beach entry diving", "tags": "Sardines,Sea Turtles" },
+      "dumaguete": { "name": "Dumaguete", "region": "Southeast Negros", "description": "Apo Island marine sanctuary, rich coral reefs and diverse marine life", "tags": "Coral Reefs,Marine Sanctuary" },
+      "sabang": { "name": "Sabang", "region": "Puerto Galera", "description": "Dive point near Manila, famous for night diving", "tags": "Night Diving,Macro" },
+      "coron": { "name": "Coron", "region": "Northern Palawan", "description": "WWII wreck diving mecca, explore Japanese warship remains", "tags": "Wreck Diving,Intermediate+" },
+      "malapascua": { "name": "Malapascua", "region": "Northern Cebu", "description": "One of the few places to see thresher sharks in the world", "tags": "Thresher Shark,Early Morning" },
+      "miyakejima": { "name": "Miyakejima", "region": "Izu Islands, South of Tokyo", "description": "Dive with dolphins, explore dynamic volcanic terrain", "tags": "Dolphins,Volcanic" },
+      "mikomoto": { "name": "Mikomoto", "region": "Southern Shizuoka", "description": "Hammerhead shark point, thrilling strong current diving", "tags": "Hammerhead,Advanced" },
+      "okinawa": { "name": "Okinawa", "region": "Southernmost Japan", "description": "Manta rays, crystal visibility, the beautiful Kerama Blue", "tags": "Manta Ray,Kerama Blue" },
+      "jeju": { "name": "Jeju Island", "region": "Jeju, South Korea", "description": "Soft coral colonies, haenyeo culture, year-round diving", "tags": "Soft Coral,Domestic" },
+      "ulleungdo": { "name": "Ulleungdo", "region": "Gyeongsangbuk-do, South Korea", "description": "Clear visibility, unique volcanic island terrain, large marine colonies", "tags": "Volcanic,High Visibility" },
+      "komodo": { "name": "Komodo", "region": "Nusa Tenggara", "description": "Manta rays, strong currents, land of the Komodo dragon", "tags": "Manta Ray,Drift" },
+      "raja-ampat": { "name": "Raja Ampat", "region": "West Papua", "description": "World's highest biodiversity, coral paradise", "tags": "Biodiversity,Bucket List" },
+      "bali": { "name": "Bali", "region": "Bali, Indonesia", "description": "Manta Point, Nusa Penida mola mola, USS Liberty wreck", "tags": "Mola Mola,Wreck Diving" },
+      "palau": { "name": "Palau", "region": "Micronesia", "description": "Blue Corner, German Channel, Jellyfish Lake. One of the world's top 7 dive sites", "tags": "Blue Corner,Sharks" },
+      "sipadan": { "name": "Sipadan", "region": "Sabah, Borneo", "description": "Barracuda tornado, turtle paradise, world top 10 dive point", "tags": "Barracuda,Sea Turtles" },
+      "cancun": { "name": "Cancun", "region": "Yucatan Peninsula", "description": "Cenote cave diving, underwater museum, bull shark diving", "tags": "Cenote,Bull Shark" }
+    }
   },
   "Metadata": {
     "title": "GoDiveKor | Scuba Diving Education & Tours",
